@@ -12,6 +12,7 @@ d = 0.01;
 h = 0.01;
 t_m = 0.5;
 
+% Coefficients
 A = 1  + 0.5 * rho_ratio;
 B = (1 - rho_ratio) * g;
 C = 3 * rho_ratio / (4 * d);
