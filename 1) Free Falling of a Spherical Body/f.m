@@ -1,3 +1,5 @@
+% Right_Part function
+
 function Right_Part = f(~, y)
 
 global A B C d nu;
