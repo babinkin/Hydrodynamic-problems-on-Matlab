@@ -1,3 +1,4 @@
+%Lift coefficient
 function C_l = c_l(V, T)
 
 global alpha_0
