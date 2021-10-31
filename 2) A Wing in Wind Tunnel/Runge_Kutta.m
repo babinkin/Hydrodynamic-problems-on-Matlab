@@ -1,3 +1,4 @@
+% Runge-Kutta 4-th order
 function [t, y] = Runge_Kutta(f, t_interval, y0)
 
     global h;
