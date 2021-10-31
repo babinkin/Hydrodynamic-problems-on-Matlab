@@ -3,6 +3,7 @@ clear;
 
 global  rho_f m k g S alpha_0 betta  a omega t_max h U0;
 
+%Enter parameters
 rho_f = 1.22;
 m = 3;
 k = 980;
