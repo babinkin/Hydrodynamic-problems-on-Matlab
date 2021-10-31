@@ -1,3 +1,4 @@
+% Function that switches the horizontal velocity to fluctuation
 function U1 = U_new (T)
 global omega a U0
 
