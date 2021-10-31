@@ -1,3 +1,4 @@
+%Right part function
 function F = f(t, y)
 
 global  betta;
