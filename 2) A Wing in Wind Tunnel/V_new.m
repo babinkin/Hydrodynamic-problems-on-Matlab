@@ -1,3 +1,4 @@
+% Function that switches the vertical velocity to fluctuation
 function V1 = V_new(T, V0)
 global a omega
 
