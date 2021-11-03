@@ -1,4 +1,4 @@
-function [t, z] = RungeKutta(F1, F2, t_interval, z0)  
+function [t, z] = RungeKutta(F, t_interval, z0)  
 
 % z - матрица, где 1 столбец - x; 2 столбец - y; 3 столбец - U; 4 столбец - V
 % t_interval = [t0, t_end]
@@ -7,9 +7,10 @@ function [t, z] = RungeKutta(F1, F2, t_interval, z0)
 
     global h;
     
-    n = (t_interval(2) - t_interval(1)) / h;
+    n = round((t_interval(2) - t_interval(1)) / h);
     z = zeros(n+1, 4);
     t = zeros(n+1, 1);
+   
     t(1) = t_interval(1);
     z(1, 1) = z0(1);
     z(1, 2) = z0(2);
@@ -25,11 +26,11 @@ for i = 1 : n
      tempy = z(i, 4);
      delta1y = h * tempy;
      
-     tempU = F1([z(i, 1), z(i, 2), tempx, tempy], t(i));
-     delta1U = h * tempU(2);
+     tempU = F([z(i, 1), z(i, 2), tempx, tempy], t(i));
+     delta1U = h * tempU(3);
      
-     tempV = F2([z(i, 1), z(i, 2), tempx, tempy], t(i));
-     delta1V = h * tempV(2);
+     tempV = F([z(i, 1), z(i, 2), tempx, tempy], t(i));
+     delta1V = h * tempV(4);
     
      tempx = z(i, 3) + 0.5 * delta1U;
      delta2x = h * tempx;
@@ -37,11 +38,11 @@ for i = 1 : n
      tempy = z(i, 4) + 0.5 * delta1V;
      delta2y = h * tempy;
      
-     tempU = F1([z(i, 1) + 0.5 * delta1x ,z(i, 2) + 0.5 * delta1y, tempx, tempy], t(i));
-     delta2U = h * tempU(2);
+     tempU = F([z(i, 1) + 0.5 * delta1x ,z(i, 2) + 0.5 * delta1y, tempx, tempy], t(i));
+     delta2U = h * tempU(3);
      
-     tempV = F2([z(i, 1) + 0.5 * delta1x ,z(i, 2) + 0.5 * delta1y, tempx, tempy], t(i));
-     delta2V = h * tempV(2);
+     tempV = F([z(i, 1) + 0.5 * delta1x ,z(i, 2) + 0.5 * delta1y, tempx, tempy], t(i));
+     delta2V = h * tempV(4);
      
      tempx = z(i, 3) + 0.5 * delta2U;
      delta3x = h * tempx;
@@ -49,11 +50,11 @@ for i = 1 : n
      tempy = z(i, 4) + 0.5 * delta2V;
      delta3y = h * tempy;
      
-     tempU = F1([z(i, 1) + 0.5 * delta2x, z(i, 2) + 0.5 * delta2y, tempx, tempy], t(i));
-     delta3U = h * tempU(2);
+     tempU = F([z(i, 1) + 0.5 * delta2x, z(i, 2) + 0.5 * delta2y, tempx, tempy], t(i));
+     delta3U = h * tempU(3);
      
-     tempV = F2([z(i, 1) + 0.5 * delta2x, z(i, 2) + 0.5 * delta2y, tempx, tempy], t(i));
-     delta3V = h * tempV(2);
+     tempV = F([z(i, 1) + 0.5 * delta2x, z(i, 2) + 0.5 * delta2y, tempx, tempy], t(i));
+     delta3V = h * tempV(4);
      
      tempx = z(i, 3) + delta3U;
      delta4x = h * tempx;
@@ -61,11 +62,11 @@ for i = 1 : n
      tempy = z(i, 4) + delta3V;
      delta4y = h * tempy;
      
-     tempU = F1([z(i, 1) + delta3x, z(i, 2) + delta3y, tempx, tempy], t(i));
-     delta4U = h * tempU(2);
+     tempU = F([z(i, 1) + delta3x, z(i, 2) + delta3y, tempx, tempy], t(i));
+     delta4U = h * tempU(3);
      
-     tempV = F2([z(i, 1) + delta3x, z(i, 2) + delta3y, tempx, tempy], t(i));
-     delta4V = h * tempV(2);
+     tempV = F([z(i, 1) + delta3x, z(i, 2) + delta3y, tempx, tempy], t(i));
+     delta4V = h * tempV(4);
    
      z(i + 1, 1) = z(i, 1) + (delta1x + 2 * delta2x + 2 * delta3x + delta4x) / 6;
      z(i + 1, 2) = z(i, 2) + (delta1y + 2 * delta2y + 2 * delta3y + delta4y) / 6;
