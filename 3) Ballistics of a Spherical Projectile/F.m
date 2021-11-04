@@ -2,8 +2,6 @@ function F = F(z, ~)
 
 global rho_ratio d g Uf Vf;
 
-Uf = 0;
-Vf = 0;
 
 U = z(3);
 V = z(4);
