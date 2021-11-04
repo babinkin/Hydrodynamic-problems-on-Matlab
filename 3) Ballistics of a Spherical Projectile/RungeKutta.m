@@ -17,7 +17,9 @@ function [t, z] = RungeKutta(F, t_interval, z0)
     z(1, 3) = z0(3);
     z(1, 4) = z0(4);
 
+
 for i = 1 : n
+    
      t(i + 1) = t(i) + h;
      
      tempx = z(i, 3);
@@ -68,13 +70,15 @@ for i = 1 : n
      tempV = F([z(i, 1) + delta3x, z(i, 2) + delta3y, tempx, tempy], t(i));
      delta4V = h * tempV(4);
    
+   
      z(i + 1, 1) = z(i, 1) + (delta1x + 2 * delta2x + 2 * delta3x + delta4x) / 6;
      z(i + 1, 2) = z(i, 2) + (delta1y + 2 * delta2y + 2 * delta3y + delta4y) / 6;
      z(i + 1, 3) = z(i, 3) + (delta1U + 2 * delta2U + 2 * delta3U + delta4U) / 6;
      z(i + 1, 4) = z(i, 4) + (delta1V + 2 * delta2V + 2 * delta3V + delta4V) / 6;
-   
+     
+  
    
 end
 
-end
+    end
 
