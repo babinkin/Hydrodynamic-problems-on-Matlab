@@ -1,4 +1,4 @@
-function F = F(z, ~)
+function F = F(~, z)
 
 global rho_ratio d g Uf Vf;
 
