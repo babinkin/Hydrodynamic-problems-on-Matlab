@@ -28,10 +28,10 @@ for i = 1 : n
      tempy = z(i, 4);
      delta1y = h * tempy;
      
-     tempU = F([z(i, 1), z(i, 2), tempx, tempy], t(i));
+     tempU = F(t(i), [z(i, 1), z(i, 2), tempx, tempy]);
      delta1U = h * tempU(3);
      
-     tempV = F([z(i, 1), z(i, 2), tempx, tempy], t(i));
+     tempV = F(t(i), [z(i, 1), z(i, 2), tempx, tempy]);
      delta1V = h * tempV(4);
     
      tempx = z(i, 3) + 0.5 * delta1U;
@@ -40,10 +40,10 @@ for i = 1 : n
      tempy = z(i, 4) + 0.5 * delta1V;
      delta2y = h * tempy;
      
-     tempU = F([z(i, 1) + 0.5 * delta1x ,z(i, 2) + 0.5 * delta1y, tempx, tempy], t(i));
+     tempU = F(t(i), [z(i, 1) + 0.5 * delta1x ,z(i, 2) + 0.5 * delta1y, tempx, tempy]);
      delta2U = h * tempU(3);
      
-     tempV = F([z(i, 1) + 0.5 * delta1x ,z(i, 2) + 0.5 * delta1y, tempx, tempy], t(i));
+     tempV = F(t(i), [z(i, 1) + 0.5 * delta1x ,z(i, 2) + 0.5 * delta1y, tempx, tempy]);
      delta2V = h * tempV(4);
      
      tempx = z(i, 3) + 0.5 * delta2U;
@@ -52,10 +52,10 @@ for i = 1 : n
      tempy = z(i, 4) + 0.5 * delta2V;
      delta3y = h * tempy;
      
-     tempU = F([z(i, 1) + 0.5 * delta2x, z(i, 2) + 0.5 * delta2y, tempx, tempy], t(i));
+     tempU = F(t(i), [z(i, 1) + 0.5 * delta2x, z(i, 2) + 0.5 * delta2y, tempx, tempy]);
      delta3U = h * tempU(3);
      
-     tempV = F([z(i, 1) + 0.5 * delta2x, z(i, 2) + 0.5 * delta2y, tempx, tempy], t(i));
+     tempV = F(t(i), [z(i, 1) + 0.5 * delta2x, z(i, 2) + 0.5 * delta2y, tempx, tempy]);
      delta3V = h * tempV(4);
      
      tempx = z(i, 3) + delta3U;
@@ -64,10 +64,10 @@ for i = 1 : n
      tempy = z(i, 4) + delta3V;
      delta4y = h * tempy;
      
-     tempU = F([z(i, 1) + delta3x, z(i, 2) + delta3y, tempx, tempy], t(i));
+     tempU = F(t(i), [z(i, 1) + delta3x, z(i, 2) + delta3y, tempx, tempy]);
      delta4U = h * tempU(3);
      
-     tempV = F([z(i, 1) + delta3x, z(i, 2) + delta3y, tempx, tempy], t(i));
+     tempV = F(t(i), [z(i, 1) + delta3x, z(i, 2) + delta3y, tempx, tempy]);
      delta4V = h * tempV(4);
    
    
