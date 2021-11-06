@@ -40,7 +40,7 @@ tetta60 = 60 * pi / 180;
 w0_u60 = w0 * cos(tetta60);
 w0_v60 = w0 * sin(tetta60);
 
- [t3, x3, y3, U3, V3] = flightPath(t0, 0, 0, w0_u45, w0_v60);
+ [t3, x3, y3, U3, V3] = flightPath(t0, 0, 0, w0_u60, w0_v60);
 
 
  %Вывод траектории полёта
@@ -50,5 +50,11 @@ title('y(x)');
 xlabel('x');
 ylabel('y');
 xlim([0 300]);
-ylim([0 100]);
+ylim([-10 100]);
 legend('tetta = 30','tetta = 45','tetta = 60', 'Location', 'best');
+
+
+%Вывод дальности полёта
+Find_Range(t0, 0, 0, w0_u30, w0_v30);
+Find_Range(t0, 0, 0, w0_u45, w0_v45);
+Find_Range(t0, 0, 0, w0_u60, w0_v60);
