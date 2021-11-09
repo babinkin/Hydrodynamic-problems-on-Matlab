@@ -1,23 +1,23 @@
 clc;
 clear;
 
-global rho_ratio d nu g h Uf Vf w0;
+global rho_ratio d nu g h Uf Vf w0; %rho for 1.8; rho_ratio for other
 
-rho_f = 1.22 ; %1.22 для воздуха, 0 для вакуума  
-rho = 8000; % сталь
+rho_f = 1.22 ; %1.22 air, 0 for vacuum
+rho = 8000; % steel
 rho_ratio = rho_f / rho;
 
 h = 0.1;
-d = 0.05;
+d = 0.05; % 0.05, 0.01, 0.09, 0.3
 nu = 1.49e-5;
 g = 9.8;
 t0 = 0;
-w0 = 50; %начальная скорость
-Uf = 0; % 0, 20, -20 скорость ветра
+w0 = 50; %initial velocity; 50, for 1.8: 800
+Uf = 0; % 0, 20, -20 wind velocity
 Vf = 0;
 
 
-%Расчёт для тетта = 30
+%Calculation for tetta = 30
  tetta30 = 30 * pi / 180; % угол между начальной скоростью и OX
  w0_u30 = w0 * cos(tetta30);
  w0_v30 = w0 * sin(tetta30);
@@ -25,7 +25,7 @@ Vf = 0;
  [t1, x1, y1, U1, V1] = flightPath(t0, 0, 0, w0_u30, w0_v30);
 
 
- %Расчёт для тетта = 45
+ %Calculation for tetta  = 45
 tetta45 = 45 * pi / 180; 
 w0_u45 = w0 * cos(tetta45);
 w0_v45 = w0 * sin(tetta45);
@@ -33,7 +33,7 @@ w0_v45 = w0 * sin(tetta45);
  [t2, x2, y2, U2, V2] = flightPath(t0, 0, 0, w0_u45, w0_v45);
 
 
-%Расчёт для тетта = 60
+%Calculation for tetta = 60
 tetta60 = 60 * pi / 180; 
 w0_u60 = w0 * cos(tetta60);
 w0_v60 = w0 * sin(tetta60);
@@ -47,8 +47,8 @@ figure(1)
 title('y(x)');
 xlabel('x');
 ylabel('y');
-xlim([0 300]);
-ylim([-10 100]);
+xlim([0 300]); %300, for 1.8: 14000
+ylim([-10 100]); %100, for 1.8: 10000
 legend('tetta = 30','tetta = 45','tetta = 60', 'Location', 'best');
 
 
@@ -66,8 +66,11 @@ x_r_60 =Find_Range(t0, 0, 0, w0_u60, w0_v60);
 disp(x_r_60);
 
 
-[x_r_max, theta_optimal] = HalfIntervalMethod(t0,1e-3);
+%Вывод максимальной дальности полёта
+[x_r_max, theta_optimal] = HalfIntervalMethod(t0,1e-5);
 disp('Максимальная дальность полёта:');
 disp(x_r_max);
+
+%Вывод оптимального угла
 disp('Достигается при угле tetta ');
 disp(theta_optimal);
