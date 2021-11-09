@@ -1,6 +1,7 @@
 function [x_r_max,theta_optimal] = HalfIntervalMethod(t0, epsilon)
 
 global w0;
+
 theta_old = 0 ;
 delta = 10;
 
