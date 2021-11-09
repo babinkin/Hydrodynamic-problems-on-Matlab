@@ -54,10 +54,20 @@ legend('tetta = 30','tetta = 45','tetta = 60', 'Location', 'best');
 
 %Вывод дальности полёта
 disp('Дальность полёта при tetta = 30:');
-Find_Range(t0, 0, 0, w0_u30, w0_v30);
+x_r_30 = Find_Range(t0, 0, 0, w0_u30, w0_v30);
+disp(x_r_30);
 
 disp('Дальность полёта при tetta = 45:');
-Find_Range(t0, 0, 0, w0_u45, w0_v45);
+x_r_45 = Find_Range(t0, 0, 0, w0_u45, w0_v45);
+disp(x_r_45);
 
 disp('Дальность полёта при tetta = 60:');
-Find_Range(t0, 0, 0, w0_u60, w0_v60);
+x_r_60 =Find_Range(t0, 0, 0, w0_u60, w0_v60);
+disp(x_r_60);
+
+
+[x_r_max, theta_optimal] = HalfIntervalMethod(t0,1e-3);
+disp('Максимальная дальность полёта:');
+disp(x_r_max);
+disp('Достигается при угле tetta ');
+disp(theta_optimal);
