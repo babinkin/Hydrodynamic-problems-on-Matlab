@@ -4,6 +4,8 @@ global d nu ;
 
 Re = w_r * d / nu;
 
+%liftCoefficient = 0.4; %Problem 1.8
+
  if Re == 0
         c_d = 0;
     elseif Re <= 1
