@@ -1,4 +1,4 @@
-function [max_range] = Find_Range(t0, x0, y0, u0, v0) %d, w0, epsilon  % tetta_optimal
+function [max_range] = Find_Range(t0, x0, y0, u0, v0) 
 
 global h;
 
