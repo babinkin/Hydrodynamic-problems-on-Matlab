@@ -1,7 +1,8 @@
 function F = F(~, z)
 
-global rho_ratio d g Uf Vf;
+global rho_ratio  d g Uf Vf; %rho for 1.8, rho_ratio for other
 
+%rho_ratio = 1.22 * exp(-0.000118 * z(2)) / rho; %for 1.8
 
 U = z(3);
 V = z(4);
