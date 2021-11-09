@@ -18,6 +18,5 @@ y_p = Y(end, 2);
 max_range = (x_q * y_p - x_p * y_q) /(y_p - y_q);
 
 
-disp(max_range);
 end
 
