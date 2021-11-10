@@ -1,19 +1,19 @@
 clc;
 clear;
 
-global rho_ratio d nu g h Uf Vf w0; %rho for 1.8; rho_ratio for other
+global rho d nu g h Uf Vf w0; %rho for 1.8; rho_ratio for other
 
 rho_f = 1.22 ; %1.22 air, 0 for vacuum
 rho = 8000; % steel
-rho_ratio = rho_f / rho;
+%rho_ratio = rho_f / rho;
 
 h = 0.1;
-d = 0.05; % 0.05, 0.01, 0.09, 0.3
+d = 0.3; % 0.05, 0.01, 0.09, 0.3
 nu = 1.49e-5;
 g = 9.8;
 t0 = 0;
-w0 = 50; %initial velocity; 50, for 1.8: 800
-Uf = 0; % 0, 20, -20 wind velocity
+w0 = 800; %initial velocity; 50, for 1.8: 800
+Uf = 20; % 0, 20, -20 wind velocity
 Vf = 0;
 
 
@@ -47,8 +47,8 @@ figure(1)
 title('y(x)');
 xlabel('x');
 ylabel('y');
-xlim([0 300]); %300, for 1.8: 14000
-ylim([-10 100]); %100, for 1.8: 10000
+xlim([0 14000]); %300, for 1.8: 14000
+ylim([-10 10000]); %100, for 1.8: 10000
 legend('tetta = 30','tetta = 45','tetta = 60', 'Location', 'best');
 
 
