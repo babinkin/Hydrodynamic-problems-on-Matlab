@@ -10,7 +10,7 @@ function [t, y] = Runge_Kutta(f, t_interval, y0)
     y(1, 1) = y0(1);
     y(1, 2) = y0(2);
 
-for i = 1:n
+for i = 1 : n
      
     t(i+1) = t(i) + h;
     
