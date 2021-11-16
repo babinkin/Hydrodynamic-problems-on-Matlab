@@ -4,8 +4,8 @@ function [t, y] = Runge_Kutta(f, t_interval, y0)
     global h;
     
     n = (t_interval(2) - t_interval(1)) / h;
-    y = zeros(n+1, 2);
-    t = zeros(n+1, 1);
+    y = zeros(n + 1, 2);
+    t = zeros(n + 1, 1);
     t(1) = t_interval(1);
     y(1, 1) = y0(1);
     y(1, 2) = y0(2);
