@@ -24,7 +24,7 @@ for i = 1 : m
     
     for j = 1 : n
         
-        %psi(i, j) = F(x(i), y(j), '5 Doublets, egg-shaped body parallel to OX');
+        psi(i, j) = F(x(i), y(j), '5 Doublets, egg-shaped body parallel to OX');
         %psi(i, j) = F(x(i), y(j), '5 Doublets egg-shaped body at an angle a = 30 degrees');
         %psi(i, j) = F(x(i), y(j),  'A uniform stream and a source');
         %psi(i, j) = F(x(i), y(j),  'A uniform stream and a sink');
