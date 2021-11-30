@@ -1,46 +1,48 @@
 function F = F(~, z)
 
-global a m;
+global m;
 
-x = zeros(m, 1);
-y = zeros(m, 1);
+x = z(1 : length(z) / 2, 1);
+y = z(length(z) / 2 + 1 : length(z), 1); 
 
-x(1) = z(1);
-y(2) = z(2);
+n = length(x);
+U = zeros(n, 1);
+V = zeros(n, 1);
 
-U = zeros(m, 1);
-V = zeros(m, 1);
+Ui = zeros(n, 1);
+Vi = zeros(n, 1);
 
-Ui = zeros(m, 1);
-Vi = zeros(m, 1);
+G = zeros(length(x),1);
 
-
-
-
-
-for i = 1 : m
+for i = 1 : length(x)
     
-    for j = 1 : m
+       G(i) = real(sqrt(1 - (x(i) + 1 / m) ^ 2) - sqrt(1 - (x(i) - 1 / m) ^ 2));
+    
+end 
+
+for i = 1 : n
+    
+    for j = 1 : n
         
-        if i ~= j
+      if i ~= j
             
-            Ui(j) = (sqrt(1 - (x(j) / a + 1 / m) ^ 2) - sqrt(1 - (x(j) / a - 1 / m) ^ 2)) * (y(i) / a - y(j) / a) / ((x(i) / a - x(j) / a) ^ 2 + (y(i) / a - y(j) / a) ^ 2);
-            Vi(j) = - (sqrt(1 - (x(j) / a + 1 / m) ^ 2) - sqrt(1 - (x(j) / a - 1 / m) ^ 2)) * (x(i) / a - x(j) / a) / ((x(i) / a - x(j) / a) ^ 2 + (y(i) / a - y(j) / a) ^ 2);
+            Ui(j) = G(j) * (y(i) - y(j)) / ((x(i) - x(j)) ^ 2 + (y(i) - y(j)) ^ 2);
+            Vi(j) = G(j) * (x(i) - x(j)) / ((x(i) - x(j)) ^ 2 + (y(i) - y(j)) ^ 2);
+           
+      elseif i == j
             
-        elseif i == j
-            
-            Ui(j) = 0;
-            Vi(j) = 0;
-            
-        end
-        
+          Ui(j) = 0;
+          Vi(j) = 0;
+      
+      end 
+       
     end
     
     U(i) = sum(Ui);
-    V(i) = sum(Vi);
+    V(i) = - sum(Vi);
     
 end
-    
+
 
 F = [U; V];
 
