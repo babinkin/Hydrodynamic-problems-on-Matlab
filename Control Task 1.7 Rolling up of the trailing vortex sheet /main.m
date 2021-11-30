@@ -1,19 +1,14 @@
 clc;
 clear;
 
-global a m G0 h;
+global m a  h;
 
-a = 1;                          % Width of the vortex sheet
-m = 40;                       % Number of discrete point vortices
-G0 = 1038;                  % Initialy Circulation, m^2/s
-
-
-h = 1 / (25 * m);          % Time step restriction
-
+a = 1;
+m = 40;
+h = 1 / (25 * m);
 
 x0 = zeros(1, m);
-
-x0(1) = -a +  a / m;
+x0(1) = - a + a / m;
 
 for i = 2 : m
     
@@ -24,12 +19,21 @@ end
 y0 = zeros(1, m);
 
 
-[t, z] = RungeKutta(@F, [0, 0.5], [x0, y0]);
-
-x = z(1 : m, 1);
-y = z(m + 1 : 2 * m, 2);
+[t, z] = RungeKutta(@F, [0, 0.5], [x0 / a, y0 / a]);
 
 
+x1 = z(1 : m, :);
+y1 = z(m + 1 : 2 * m, :);
 
+figure(1);
 
+for i = 1 : length(z)
+    
+plot(x1(:, i), y1(:, i), '--o');
+title(['y(x) at T =', num2str(t(i))]);
+xlabel('x');
+ylabel('y');
+pause(0.01)
+
+end
 
