@@ -87,7 +87,7 @@ legend('Approximate solution','Exact solution', 'Location', 'best')
 figure(2);
 
 plot(R, Phi, ' - ro', R, Phi_exc, ' - bo');
-title('\Phi(Ri)');
+title('\Phi(R)');
 xlabel('R');
 ylabel ('\Phi');
 legend('Approximate solution','Exact solution', 'Location', 'best')
