@@ -10,11 +10,11 @@
  5. Inverse Method: Superposition of elementary flows and a Radial flow
  6. Von Karman Method
  7. Inverse Method II: Conformal Mapping
- 8.
+ 8. Solving Elliptic Partial Differential Equations
 
- Control Task 2.9.
+ Control Task 2.9. Potential Flows 
 
- 9.
-10.
-11.
+ 9. Small Amplitude Wave
+10. A Finite Amplitude Wave
+11. Flow in a Elastic Tube
 
