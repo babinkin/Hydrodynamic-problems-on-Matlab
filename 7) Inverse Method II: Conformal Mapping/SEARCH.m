@@ -6,57 +6,59 @@
 
 function [x_intersection, y_intersection, num_intersections] = SEARCH(x, y, psi, psi_a)
 
-global m n delta_y epsilon;
-
-num_intersections = 0;
-x_intersection = zeros(100, 1);
-y_intersection = zeros(100, 1);
-
-
-for i = 1 : m
+global m n k delta_y1;
     
-    j = 1;
-    
-    while j < n
+    x_intersection = zeros(k, 1);
+    y_intersection = zeros(k, 1);
+
+    num_intersections = 0;
+    epsilon = 1e-5;
+
+    for i = 1 : m
         
-        P = psi(i, j) - psi_a;
+        j = 1;
         
-        if abs(P) <= epsilon
+        while j < n
             
-            num_intersections = num_intersections + 1;
-            x_intersection(num_intersections) = x(i);
-            y_intersection(num_intersections) = y(j);
+            P = psi(i,j) - psi_a;
             
-        else
-            
-            while j < n
+            if abs(P) <= epsilon
                 
-                j = j + 1;
+                num_intersections = num_intersections + 1;
+                x_intersection(num_intersections) = x(i);
+                y_intersection(num_intersections) = y(j);
                 
-                Q = psi(i, j) - psi_a;
+            else
                 
-                if P * Q > 0
+                while j < n
                     
-                    P = Q;
+                    j = j + 1;
                     
-                else
+                    Q = psi(i,j) - psi_a;
                     
-                     num_intersections = num_intersections + 1;
-                     x_intersection(num_intersections) = x(i);
-                     y_intersection(num_intersections) = y(j) - abs(Q) * delta_y / (abs(P) + abs(Q));
-                     P = psi(i, j) - psi_a;
-                     
+                    if P * Q > 0
+                        
+                        P = Q;
+                        
+                    else
+     
+                        num_intersections = num_intersections + 1;
+                        x_intersection(num_intersections) = x(i);
+                        y_intersection(num_intersections) = y(j) - delta_y1 * abs(Q) / (abs(P) + abs(Q));
+                        P = psi(i,j) - psi_a;
+                        
+                    end
+                    
                 end
                 
             end
             
+            j = j + 1;
+            
         end
         
-  j = j + 1;
-        
     end
-    
-end
 
 end
+
 
