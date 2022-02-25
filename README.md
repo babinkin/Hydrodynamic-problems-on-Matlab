@@ -18,3 +18,7 @@
 10. A Finite Amplitude Wave
 11. Flow in a Elastic Tube
 
+Viscous Fluid Flows
+12. Self-Similar Laminar Flows
+13. Flat-Plate Thermometer
+
