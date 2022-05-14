@@ -1,62 +1,66 @@
-% Runge-Kutta 4-th order function
-function [t, y] = RungeKutta(t_interval, y0)
+function [iter, eta, f, p] = RungeKutta()
 
-    global h;
-    
-    n = (t_interval(2) - t_interval(1)) / h;
-   
-    y = zeros(n + 1, 3);
-    t = zeros(n + 1, 1);
-    
-    t(1) = t_interval(1);
-    
-    y(1, 1) = y0(1); % f
-    y(1, 2) = y0(2); % p
-    y(1, 3) = y0(3); % q
+global m epsilon q_0 dq_0 eta_max h;
 
-for i = 1 : n
-     
-    t(i + 1) = t(i) + h;
+iter = 1; % счетчик итераций
+error = -1;
+
+eta = zeros(m, 1); % eta = func(x, y) - переменная самоподобного потока
+
+f = zeros(m, 1); % f
+p = zeros(m, 1); % f'
+q = zeros(m, 1); % f''
+
+while (error < 0 || error > epsilon)
     
-    k1 = y(i, 2);
-    delta1_f = h * k1;
+    i = 1;
+    q_0 = q_0 + dq_0;
+    q(i) = q_0;
     
-    k2 = y(i, 3);
-    delta1_p = h * k2;
+    while (eta(i) <= eta_max)
+        
+        % Метод Рунге-Кутта 4-го порядка
+        delta1_f = h * p(i);
+        delta1_p = h * q(i);
+        delta1_q = - 0.5 * h * f(i) * q(i);
+        
+        delta2_f = h * (p(i) + delta1_p / 2);
+        delta2_p = h * (q(i) + delta1_q / 2);
+        delta2_q = - 0.5 * h * (f(i) + delta1_f / 2) * (q(i) + delta1_q / 2);
+        
+        delta3_f = h * (p(i) + delta2_p / 2);
+        delta3_p = h * (q(i) + delta2_q / 2);
+        delta3_q = - 0.5 * h * (f(i) + delta2_f / 2) * (q(i) + delta2_q / 2);
+        
+        delta4_f = h * (p(i) + delta3_p);
+        delta4_p = h * (q(i) + delta3_q);
+        delta4_q = - 0.5 * h * (f(i) + delta3_f) * (q(i) + delta3_q);
+        
+        f(i + 1) = f(i) + (delta1_f + 2 * delta2_f + 2 * delta3_f + delta4_f) / 6;
+        p(i + 1) = p(i) + (delta1_p + 2 * delta2_p + 2 * delta3_p + delta4_p) / 6;
+        q(i + 1) = q(i) + (delta1_q + 2 * delta2_q + 2 * delta3_q + delta4_q) / 6;
+        
+        eta(i + 1) = eta(i) + h;
+        i = i + 1;
+        
+    end
     
-    k3 = y(i, 1) * y(i, 3);
-    delta1_q = - 0.5 * h * k3;
+    % Метод полуинтервала
+    error = 1 - p(i); % ошибка
     
-    k1 = y(i, 2) + 0.5 *  delta1_p;
-    delta2_f = h * k1;
+    if(error < 0 || error > epsilon)
+        
+        if(p(i) > 1 && dq_0 > 0) || (p(i) < 1 && dq_0 < 0)
+            
+            dq_0 = - dq_0 / 2;
+            
+        end
+        
+        iter = iter + 1;
+        
+    end
     
-    k2 = y(i, 3) + 0.5 *  delta1_q;
-    delta2_p = h * k2;
-    
-    k3 = (y(i, 1) + 0.5 *  delta1_f) * (y(i, 3) + 0.5 *  delta1_q);
-    delta2_q = - 0.5 * h * k3;
-    
-    k1 = y(i, 2) + 0.5 *  delta2_p;
-    delta3_f = h * k1;
-    
-    k2 = y(i, 3) + 0.5 *  delta2_q;
-    delta3_p = h * k2;
-    
-    k3 = (y(i, 1) + 0.5 *  delta2_f) * (y(i, 3) + 0.5 *  delta2_q);
-    delta3_q = - 0.5 * h * k3;
-    
-    k1 = y(i, 2) + delta3_p;
-    delta4_f = h * k1;
-    
-    k2 = y(i,1) + delta3_v;
-    delta4_p = h * k2;
-    
-    k3 = f(t(i), k1);
-    delta4_q = h * k3(1);
-    
-    y(i + 1, 1) = y(i, 1) + (delta1_q + 2 * delta2_v + 2 * delta3_v + delta4_v) / 6;
-    y(i + 1, 2) = y(i, 2) + (delta1_f + 2 * delta2_z + 2 * delta3_z + delta4_z ) / 6;
-   
 end
 
 end
+
